@@ -14,3 +14,5 @@
 
 ## Progress
 - [ ] Week 1: Toolchain, Git, build and debug setup 
+    - Day 1: The Toolchain ✓
+    - Day 2: Git basics ✓
