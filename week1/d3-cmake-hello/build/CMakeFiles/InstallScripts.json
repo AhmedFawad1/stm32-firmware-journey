@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"F:/Embedded/stm32-firmware-journey/week1/d3-cmake-hello/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
