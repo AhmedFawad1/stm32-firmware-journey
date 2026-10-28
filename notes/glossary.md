@@ -1,13 +1,28 @@
-## Cross Compiler
-- A cross compiler is compiler that runs on a separate cpu architecture and can produce a machine code that can run on entirely different cpu architecture.
-
-## Compile
-- Compile is a process that converts all the .c files into .o file separately.
-- This process replaces references of function calls from another file with an empty space or a text that would be replaced by the actual memory address of that function during link process.
-
-## Link
-- In a link process all the object files are combined together to produce a .elf file and assign all memory addresses
-
-## Tool Chain
-- A tool chain is a set of programs that turns c source code into machine code that can be understood and run on a controller like stm32.
-- It also contains tool to load and run the code.
+| Term | Plain meaning |
+| --- | --- |
+| Tool Chain | A tool chain is a set of programs that turns c source code into machine code that can be understood and run on a controller like stm32.
+| Cross Compiler | A cross compiler is compiler that runs on a separate cpu architecture and can produce a machine code that can run on entirely different cpu architecture.
+| Build system | Tool that stores the build recipe and re-runs only the steps whose inputs changed |
+| Incremental build | Rebuilding only out-of-date outputs instead of everything |
+| Make | Classic build tool; reads rules from a `Makefile` and compares file timestamps |
+| Target | The file a rule produces (e.g. `uart.o`, `hello.exe`) |
+| Prerequisite | A file the target depends on; if it is newer than the target, the target is rebuilt |
+| Recipe | The command that builds the target; in a Makefile it must be indented with a real Tab |
+| CMake | A build system *generator*: reads `CMakeLists.txt` and writes build files for Make, Ninja, Visual Studio… |
+| CMakeLists.txt | The file you write that describes the project to CMake; committed to Git |
+| Generator | The build tool CMake writes files for, chosen with `-G` (e.g. `"Ninja"`); case-sensitive |
+| Ninja | Small, fast build tool; reads `build.ninja` |
+| build.ninja | Generated recipe file Ninja reads; never edited by hand, never committed |
+| Configure step | `cmake -S . -B build -G "Ninja"`: finds the compiler and generates the build files |
+| Build step | `cmake --build build`: runs the generator's tool to compile and link |
+| Out-of-source build | All generated files go in a separate folder (`build/`), keeping sources clean |
+| In-source build | Generated files mixed into the source folder; avoid it |
+| CMakeCache.txt | Generated file where CMake remembers settings (generator, compiler) for a build folder |
+| Header dependency tracking | Compiler records which headers each `.c` included, so a header edit triggers a rebuild automatically |
+| Native compiler | Builds programs for the same machine you build on (e.g. MSYS2 gcc → Windows `.exe`) |
+| MSVC | Microsoft's C/C++ compiler (`cl.exe`), picked by the Visual Studio generator |
+| .obj | Object file name CMake uses on Windows; same idea as `.o` |
+| `cmake_minimum_required()` | Oldest CMake version the file is written for |
+| `project()` | Names the project and declares its languages (`C` only, not C++) |
+| `add_executable()` | Creates a target (program) from a list of `.c` files |
+ 
