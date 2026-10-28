@@ -1,3 +1,0 @@
-F:/Embedded/stm32-firmware-journey/week1/d3-cmake-hello/build/CMakeFiles/hello.dir
-F:/Embedded/stm32-firmware-journey/week1/d3-cmake-hello/build/CMakeFiles/edit_cache.dir
-F:/Embedded/stm32-firmware-journey/week1/d3-cmake-hello/build/CMakeFiles/rebuild_cache.dir
