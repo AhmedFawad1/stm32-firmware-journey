@@ -25,4 +25,12 @@
 | `cmake_minimum_required()` | Oldest CMake version the file is written for |
 | `project()` | Names the project and declares its languages (`C` only, not C++) |
 | `add_executable()` | Creates a target (program) from a list of `.c` files |
+| STM32CubeMX | ST's graphical code generator: configure pins, clocks and peripherals, then it writes init code, startup file, linker script and build files |
+| Toolchain file | A `.cmake` file that tells CMake which cross-compiler and CPU flags to use; read at configure time |
+| CMake preset | A named, saved set of cmake options in `CMakePresets.json` (`cmake --preset Debug`); configure presets for step 1, build presets for step 2 |
+| Hidden preset | A base preset (`"hidden": true`) that other presets inherit from; not run directly |
+| BSP | Board Support Package: board-specific helper functions (e.g. `BSP_LED_Toggle`) built on top of the HAL |
+| USER CODE section | The space between `/* USER CODE BEGIN */` and `/* USER CODE END */` comments; the only code CubeMX keeps when it regenerates |
+| Declaration vs definition | Declaration (in a `.h`) tells the compiler a function's name and parameters; definition (in a `.c`) is the actual code the linker uses |
+| arm-none-eabi | Target name: ARM CPU, no operating system, Embedded ABI (calling convention) |
  
