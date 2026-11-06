@@ -33,4 +33,28 @@
 | USER CODE section | The space between `/* USER CODE BEGIN */` and `/* USER CODE END */` comments; the only code CubeMX keeps when it regenerates |
 | Declaration vs definition | Declaration (in a `.h`) tells the compiler a function's name and parameters; definition (in a `.c`) is the actual code the linker uses |
 | arm-none-eabi | Target name: ARM CPU, no operating system, Embedded ABI (calling convention) |
+##Day5
+| Flashing | Writing your compiled program into the microcontroller's flash memory |
+| Debug probe | Hardware between your PC and the chip that can program and control it (e.g. ST-Link, J-Link) |
+| ST-Link | ST's debug probe; built into every Nucleo board |
+| SWD | Serial Wire Debug: 2-wire link (SWDIO, SWCLK) used to program and debug Cortex-M chips |
+| JTAG | Older, wider (4-5 wire) debug interface; SWD is the 2-wire Arm alternative |
+| Probe firmware | The software running inside the ST-Link itself (e.g. `V2J48M35`); separate from your STM32 program |
+| .elf | Output file from the linker: machine code + section addresses + symbols for debugging |
+| Symbols | Names of functions and variables stored in the .elf so the debugger can show C code instead of raw addresses |
+| STM32CubeProgrammer | ST's tool (GUI + CLI) for flashing and reading STM32 memory |
+| OpenOCD | Open-source tool that talks to debug probes and runs a GDB server |
+| GDB | GNU debugger; `arm-none-eabi-gdb` is the version for Arm microcontrollers |
+| GDB server | Program (e.g. OpenOCD) that GDB connects to over a network port to control the real chip |
+| Cortex-Debug | VS Code extension that starts the GDB server and GDB and gives you debug buttons |
+| launch.json | VS Code file that tells the debugger what to run and how |
+| Verify | Reading flash back after writing to confirm it matches the file |
+| Halt | Pausing the CPU so its state can be inspected |
+| Hardware breakpoint | Breakpoint implemented by the CPU's debug unit; needed for code in flash. Limited number (6 on the F401) |
+| Watchpoint | Stops execution when a specific memory location is read or written (4 on the F401) |
+| PC | Program Counter: register holding the address of the instruction being executed |
+| MSP | Main Stack Pointer: register holding the current top of the stack |
+| Reset handler | The first code the CPU runs after reset; it sets up memory, then calls `main()` |
+| Device ID | Number identifying the STM32 family (0x433 = STM32F401xD/E) |
+ 
  
