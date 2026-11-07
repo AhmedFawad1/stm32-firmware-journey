@@ -56,5 +56,17 @@
 | MSP | Main Stack Pointer: register holding the current top of the stack |
 | Reset handler | The first code the CPU runs after reset; it sets up memory, then calls `main()` |
 | Device ID | Number identifying the STM32 family (0x433 = STM32F401xD/E) |
- 
+DAY6
+| Breakpoint | A marker on a line; the CPU stops just *before* that line runs. The F401 has 6 hardware breakpoints. |
+| Halted | CPU stopped by the debugger. Only now does VS Code read variables and registers. |
+| Continue (F5) | Let the CPU run until the next breakpoint. |
+| Step Over (F10) | Run the current line, including any function it calls, then stop on the next line. |
+| Step Into (F11) | If the line calls a function, go inside it and stop at its first line. |
+| Step Out (Shift+F11) | Finish the current function and stop back where it was called. |
+| Call stack | The chain of functions that led to the current line (who called whom). |
+| Variables panel | Shows local and global variables automatically when halted; right-click → Set Value edits them. |
+| Watch panel | A list of variables or expressions you choose to track; updates at every halt. |
+| Set Value | Writes a new value into RAM while halted. Lost on reset; to make it permanent, edit the code, rebuild and flash. |
+| Live Watch | Cortex-Debug feature that reads values while the CPU runs, without halting (see W9). |
+| USER CODE BEGIN/END | CubeMX markers. Code between them survives regeneration; code outside is deleted. |
  

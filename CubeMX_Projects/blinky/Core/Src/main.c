@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "stdint.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -90,17 +90,21 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint32_t  blink_count = 0;
+  uint32_t blink_delay_ms = 500;
   while (1)
   {
     /* USER CODE END WHILE */
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-    HAL_Delay(5000);
+    
     /* USER CODE BEGIN 3 */
+    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+    blink_count++;
+    HAL_Delay(blink_delay_ms);
   }
   /* USER CODE END 3 */
 }
