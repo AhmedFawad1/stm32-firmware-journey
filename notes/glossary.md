@@ -69,4 +69,45 @@ DAY6
 | Set Value | Writes a new value into RAM while halted. Lost on reset; to make it permanent, edit the code, rebuild and flash. |
 | Live Watch | Cortex-Debug feature that reads values while the CPU runs, without halting (see W9). |
 | USER CODE BEGIN/END | CubeMX markers. Code between them survives regeneration; code outside is deleted. |
+| Arm GNU Toolchain (arm-none-eabi-gcc) | 15.2.Rel1 | Cross-compiling for Cortex-M |
+| CMake | 4.4.4 | Configure step (generates build.ninja) |
+| Ninja | 1.13.2 | Build step (runs compiler + linker) |
+| STM32CubeMX | 6.18.1 | Generates init code, startup file, linker script, CMake files |
+| STM32CubeProgrammer CLI | 2.23.0 | Flashing from the terminal |
+| xPack OpenOCD | 0.12.0 | GDB server for debugging |
+| VS Code + Cortex-Debug | 1.145.1 | Debugging UI |
  
+### Build
+```bash
+cmake --preset Debug          # configure: creates build/Debug/ and writes build.ninja
+cmake --build --preset Debug  # build: Ninja compiles + links -> build/Debug/blinky.elf
+```
+Changed the compiler or moved the project folder? Delete `build/` and configure again (CMake caches absolute paths).
+ 
+### Flash
+```bash
+STM32_Programmer_CLI -c port=SWD -w build/Debug/blinky.elf -v -rst
+```
+`-c` connect over SWD, `-w` write, `-v` verify (read back and compare), `-rst` reset so the program starts.
+All options must be in **one** command: each run of the CLI disconnects when it exits, so a separate `-w` would have no connection.
+ 
+### Debug
+Chain: VS Code + Cortex-Debug → arm-none-eabi-gdb → OpenOCD (GDB server, port 3333) → ST-Link → SWD → STM32.
+OpenOCD turns gdb commands (breakpoint, read variable) into SWD operations.
+ 
+Key parts of `.vscode/launch.json`:
+```json
+"servertype": "openocd",
+"configFiles": ["interface/stlink.cfg", "target/stm32f4x.cfg"],
+"runToEntryPoint": "main"
+```
+F5 starts debugging and stops at `main()`.
+ 
+### Gotchas I hit
+Format: symptom → cause → fix
+ 
+- `DEV_USB_COMM_ERR` when connecting → old ST-Link firmware (V2J28M18) → upgraded to V2J48M35 with the CubeProgrammer GUI
+- "connection to target must be established first" → (your words)
+- "GDB Server Quit Unexpectedly" → (your words)
+- Flash command ran but nothing changed on the board → (your words)
+- My code disappeared after regenerating in CubeMX (or would have) → (your words)
