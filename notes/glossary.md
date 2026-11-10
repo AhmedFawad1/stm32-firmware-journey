@@ -76,7 +76,18 @@ DAY6
 | STM32CubeProgrammer CLI | 2.23.0 | Flashing from the terminal |
 | xPack OpenOCD | 0.12.0 | GDB server for debugging |
 | VS Code + Cortex-Debug | 1.145.1 | Debugging UI |
- 
+ Week 2 Day1
+| Fixed-width type | Integer type with an exact size in its name, from `<stdint.h>` (`uint8_t`, `int32_t`). Same size on every compiler. |
+| `stdint.h` | Standard header that defines the fixed-width integer types. |
+| `sizeof` | Operator that gives the size of a type or object in bytes, worked out at compile time. Returns `size_t`. |
+| `size_t` | Unsigned type for sizes and counts; as wide as a pointer (8 bytes on 64-bit PC, 4 on Cortex-M4). Print with `%zu`. |
+| Unsigned overflow | Going past the max of an unsigned type; wraps modulo 2^N (`uint8_t` 255 + 1 = 0). Defined behaviour. |
+| Signed overflow | Going past the range of a signed type; undefined behaviour, the compiler may assume it never happens. |
+| Undefined behaviour (UB) | Code the C standard gives no meaning to; the result can be anything and can change with optimization level. |
+| Integer promotion | C converts small types (`char`, `short`, `uint8_t`) to `int` before doing arithmetic on them. |
+| Stringizing (`#`) | In a macro, `#x` turns the argument into a string literal: `#char` → `"char"`. |
+| Stack frame | The area of stack a function uses for its local variables; the debugger shows a function's locals only while stopped in that function. |
+
 ### Build
 ```bash
 cmake --preset Debug          # configure: creates build/Debug/ and writes build.ninja

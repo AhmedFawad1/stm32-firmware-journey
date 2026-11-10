@@ -19,6 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stdint.h"
+#include "stdio.h"
+#include "stddef.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -31,12 +33,18 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+typedef struct 
+{
+  char name[10];
+ uint8_t size;
+  /* data */
+} Items;
 
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define SHOW(t) printf("%-10s %zu",#t, sizeof(t))
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -97,11 +105,29 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   uint32_t  blink_count = 0;
   uint32_t blink_delay_ms = 500;
+  Items sizes[13] = {
+    {"char", sizeof(char)},
+    {"int",sizeof(int)},
+    {"short",sizeof(short)},
+    {"long",sizeof(long)},
+    {"long long",sizeof(long long)},
+    {"float",sizeof(float)},
+    {"double",sizeof(double)},
+    {"uint_8",sizeof(uint8_t)},
+    {"uint_16",sizeof(uint16_t)},
+    {"uint_32",sizeof(uint32_t)},
+    {"uint_64",sizeof(uint64_t)},
+    {"size_t",sizeof(size_t)},
+    {"Void *",sizeof(void *)}
+  };
+  uint8_t size_v;
+  char var_name;
   while (1)
   {
     /* USER CODE END WHILE */
     
     /* USER CODE BEGIN 3 */
+    
     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
     blink_count++;
     HAL_Delay(blink_delay_ms);
